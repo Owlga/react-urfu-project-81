@@ -12,26 +12,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Клонируем репозиторий
       - uses: actions/checkout@v4
         with:
-          persist-credentials: false 
+          persist-credentials: false
 
-      # 2. Устанавливаем Node.js (версия 20)
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup mise
+        uses: jdx/mise-action@v2
         with:
-          node-version: '20'
-          cache: 'npm'
+          install: true # Автоматически запускает mise install
 
-      # 3. Устанавливаем зависимости
       - name: Install dependencies
-        run: make install
+        run: npm ci
 
-      # 4. Запускаем линтер (через Makefile)
       - name: Run Linter
         run: make lint
 
-      # 5. Запускаем тесты с покрытием (через Makefile)
       - name: Run Tests with Coverage
         run: make test-coverage

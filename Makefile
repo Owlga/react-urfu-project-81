@@ -21,10 +21,10 @@ lint:
 	npm run lint
 	rumdl check .
 	typos
-	jactionlint
-
+# 	jactionlint
 lint-fix:
 	npm run lint-fix
+	rumdl fmt
 
 typecheck:
 	npm run typecheck

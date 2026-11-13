@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Клонируем репозиторий
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false 
+
+      # 2. Устанавливаем Node.js (версия 20)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 3. Устанавливаем зависимости
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Запускаем линтер (через Makefile)
+      - name: Run Linter
+        run: make lint
+
+      # 5. Запускаем тесты с покрытием (через Makefile)
+      - name: Run Tests with Coverage
+        run: make test-coverage

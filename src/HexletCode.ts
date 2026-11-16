@@ -26,6 +26,13 @@ class FormData {
     const tag = new Tag(tagName, obj, content);
     this.allTagsStrings.push(tag.toString());
   }
+  private static capitalize(s: string) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+
+  private static createLabelTag(name: string) {
+    return new Tag("label", { for: name }, FormData.capitalize(name));
+  }
 
   input(name: string, attrOptions?: Record<string, string>) {
     const nameValue = this.template[name] ?? undefined;
@@ -33,6 +40,7 @@ class FormData {
       throw new Error("Missing name attribute in template");
     }
     const nameObj = { name: name };
+    this.allTagsStrings.push(FormData.createLabelTag(name).toString());
 
     if (attrOptions && attrOptions.hasOwnProperty("as")) {
       this.createAsTag(attrOptions, nameObj, nameValue);
@@ -41,6 +49,11 @@ class FormData {
       const tag = new Tag("input", obj);
       this.allTagsStrings.push(tag.toString());
     }
+  }
+
+  submit(value?: string) {
+    const submitTag = new Tag("input", { type: "submit", value: value || "Save" });
+    this.allTagsStrings.push(submitTag.toString());
   }
 }
 

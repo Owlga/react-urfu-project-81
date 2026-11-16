@@ -8,7 +8,10 @@ test("1 input", () => {
     f.input("name");
   });
   const expected =
-    '<form action="#" method="post">' + '<input name="name" type="text" value="rob">' + "</form>";
+    '<form action="#" method="post">' +
+    '<label for="name">Name</label>' +
+    '<input name="name" type="text" value="rob">' +
+    "</form>";
   expect(form.toString()).toBe(expected);
 });
 
@@ -19,7 +22,9 @@ test("доп инфа в инпуте", () => {
   });
   const expected =
     '<form action="#" method="post">' +
+    '<label for="name">Name</label>' +
     '<input name="name" type="text" value="rob" class="user-input">' +
+    '<label for="job">Job</label>' +
     '<input name="job" type="text" value="hexlet">' +
     "</form>";
   expect(form.toString()).toBe(expected);
@@ -29,6 +34,7 @@ test("только as", () => {
   const form = formFor(template, {}, (f) => f.input("job", { as: "textarea" }));
   const expected =
     '<form action="#" method="post">' +
+    '<label for="job">Job</label>' +
     '<textarea cols="20" rows="40" name="job">hexlet</textarea>' +
     "</form>";
   expect(form.toString()).toBe(expected);
@@ -40,6 +46,7 @@ test("as переопределение дефолтов", () => {
   );
   const expected =
     '<form action="#" method="post">' +
+    '<label for="job">Job</label>' +
     '<textarea cols="50" rows="50" name="job">hexlet</textarea>' +
     "</form>";
   expect(form.toString()).toBe(expected);
@@ -51,6 +58,7 @@ test("as допы", () => {
   );
   const expected =
     '<form action="#" method="post">' +
+    '<label for="job">Job</label>' +
     '<textarea cols="20" rows="40" name="job" class="my-textarea">hexlet</textarea>' +
     "</form>";
   expect(form.toString()).toBe(expected);

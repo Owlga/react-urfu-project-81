@@ -28,3 +28,11 @@ test("form with new method put", () => {
     '<form action="#" method="put"></form>',
   );
 });
+
+test("throws an error if field is missing in template", () => {
+  expect(() => {
+    formFor(template, {}, (f) => {
+      f.input("age");
+    });
+  }).toThrow("Field 'age' does not exist in the template.");
+});

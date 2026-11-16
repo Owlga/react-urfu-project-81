@@ -19,10 +19,10 @@ class FormBuilder {
   }
 
   input(name: string, attrOptions: Record<string, string> = {}) {
-    const nameValue = this.template[name] ?? undefined;
-    if (!nameValue) {
-      throw new Error("Missing name attribute in template");
+    if (!(name in this.template)) {
+      throw new Error(`Field '${name}' does not exist in the template.`);
     }
+    const nameValue = this.template[name];
     this.allTags.push(FormBuilder.createLabelTag(name));
 
     if (attrOptions.as === "textarea") {
@@ -47,7 +47,7 @@ class FormBuilder {
 function formFor(
   template: Record<string, string>,
   options: Record<string, unknown> = {},
-  callback: (f: any) => void = () => {},
+  callback: (f: any) => void,
 ) {
   const data = { action: options.url || "#", method: options.method || "post" };
   const builder = new FormBuilder(template);

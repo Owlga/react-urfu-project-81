@@ -21,6 +21,13 @@ cd react-urfu-project-81
 
 ## Использование
 
+```text
+const template = { name: 'rob', job: 'hexlet', gender: 'm' };
+const form = HexletCode.formFor(template, { method: 'post' }, (f) => {
+  f.input('name');
+  f.input('job', { as: 'textarea' });
+});
+```
 <!-- Добавьте примеры запуска и запись asciinema — именно это смотрит работодатель -->
 
 ---

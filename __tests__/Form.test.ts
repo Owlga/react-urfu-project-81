@@ -19,11 +19,12 @@ test("form with ''", () => {
   );
 });
 
-test("form with undefined", () => {
-  expect(formFor(template, { url: undefined }, () => {}).toString()).toBe(
-    '<form action="#" method="post"></form>',
-  );
-});
-test("form with empty", () => {
+test("form with empty object", () => {
   expect(formFor(template, {}, () => {}).toString()).toBe('<form action="#" method="post"></form>');
+});
+
+test("form with new method put", () => {
+  expect(formFor(template, { method: "put" }, () => {}).toString()).toBe(
+    '<form action="#" method="put"></form>',
+  );
 });

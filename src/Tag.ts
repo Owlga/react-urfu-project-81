@@ -19,7 +19,7 @@ class Tag {
   constructor(
     public readonly name: string,
     private readonly options?: Record<string, unknown>,
-    private readonly insideInfo?: string,
+    private readonly content?: string,
   ) {}
 
   private renderAttributes(): string {
@@ -37,7 +37,7 @@ class Tag {
     if (Tag.voidElements.has(this.name)) {
       return `<${this.name}${attrs}>`;
     }
-    return `<${this.name}${attrs}>${this.insideInfo ?? ""}</${this.name}>`;
+    return `<${this.name}${attrs}>${this.content ?? ""}</${this.name}>`;
   }
 }
 

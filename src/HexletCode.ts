@@ -5,39 +5,39 @@ class FormData {
   constructor(private template: Record<string, string>) {}
 
   private createAsTag(
-    options: Record<string, string>,
+    attrOptions: Record<string, string>,
     nameObj: Record<string, string>,
-    nameValue: string,
+    content: string,
   ) {
-    const tagName = options.as;
+    const tagName = attrOptions.as;
     let defaults: Record<string, string> = {};
     if (tagName === "textarea") {
       defaults = { cols: "20", rows: "40" };
     }
     const tagOptions: Record<string, string> = {};
-    for (const attr of Object.keys(options)) {
+    for (const attr of Object.keys(attrOptions)) {
       if (defaults.hasOwnProperty(attr)) {
-        defaults[attr] = options[attr];
+        defaults[attr] = attrOptions[attr];
       } else if (attr !== "as") {
-        tagOptions[attr] = options[attr];
+        tagOptions[attr] = attrOptions[attr];
       }
     }
     const obj = { ...defaults, ...nameObj, ...tagOptions };
-    const tag = new Tag(tagName, obj, nameValue);
+    const tag = new Tag(tagName, obj, content);
     this.allTagsStrings.push(tag.toString());
   }
 
-  input(name: string, options?: Record<string, string>) {
+  input(name: string, attrOptions?: Record<string, string>) {
     const nameValue = this.template[name] ?? undefined;
     if (!nameValue) {
       throw new Error("Missing name attribute in template");
     }
     const nameObj = { name: name };
 
-    if (options && options.hasOwnProperty("as")) {
-      this.createAsTag(options, nameObj, nameValue);
+    if (attrOptions && attrOptions.hasOwnProperty("as")) {
+      this.createAsTag(attrOptions, nameObj, nameValue);
     } else {
-      const obj = { ...nameObj, type: "text", value: nameValue, ...options };
+      const obj = { ...nameObj, type: "text", value: nameValue, ...attrOptions };
       const tag = new Tag("input", obj);
       this.allTagsStrings.push(tag.toString());
     }

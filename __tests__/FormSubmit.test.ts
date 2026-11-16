@@ -1,5 +1,6 @@
 import { expect, test } from "vitest";
 import HexletCode from "../src/HexletCode.js";
+import { expectedForms } from "./__fixtures__/expectedForms";
 
 const template = { name: "rob", job: "hexlet", gender: "m" };
 
@@ -9,14 +10,7 @@ test("submit по умолчанию — Save", () => {
     f.input("job");
     f.submit();
   });
-  const expected =
-    '<form action="#" method="post">' +
-    '<label for="name">Name</label>' +
-    '<input name="name" type="text" value="rob">' +
-    '<label for="job">Job</label>' +
-    '<input name="job" type="text" value="hexlet">' +
-    '<input type="submit" value="Save">' +
-    "</form>";
+  const expected = expectedForms.submitDefault;
   expect(form.toString()).toBe(expected);
 });
 
@@ -26,13 +20,6 @@ test("submit с кастомным текстом", () => {
     f.input("job");
     f.submit("Wow");
   });
-  const expected =
-    '<form action="#" method="post">' +
-    '<label for="name">Name</label>' +
-    '<input name="name" type="text" value="rob">' +
-    '<label for="job">Job</label>' +
-    '<input name="job" type="text" value="hexlet">' +
-    '<input type="submit" value="Wow">' +
-    "</form>";
+  const expected = expectedForms.submitExtra;
   expect(form.toString()).toBe(expected);
 });

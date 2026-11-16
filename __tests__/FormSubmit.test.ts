@@ -1,10 +1,10 @@
 import { expect, test } from "vitest";
-import formFor from "../src/HexletCode";
+import HexletCode from "../src/HexletCode.js";
 
 const template = { name: "rob", job: "hexlet", gender: "m" };
 
 test("submit по умолчанию — Save", () => {
-  const form = formFor(template, { method: "post" }, (f) => {
+  const form = HexletCode.formFor(template, { method: "post" }, (f) => {
     f.input("name");
     f.input("job");
     f.submit();
@@ -21,7 +21,7 @@ test("submit по умолчанию — Save", () => {
 });
 
 test("submit с кастомным текстом", () => {
-  const form = formFor(template, { method: "post" }, (f) => {
+  const form = HexletCode.formFor(template, { method: "post" }, (f) => {
     f.input("name");
     f.input("job");
     f.submit("Wow");

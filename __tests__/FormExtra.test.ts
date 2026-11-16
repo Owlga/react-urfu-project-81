@@ -1,10 +1,10 @@
 import { expect, test } from "vitest";
-import formFor from "../src/HexletCode";
+import HexletCode from "../src/HexletCode.js";
 
 const template = { name: "rob", job: "hexlet", gender: "m" };
 
 test("1 input", () => {
-  const form = formFor(template, { method: "post" }, (f) => {
+  const form = HexletCode.formFor(template, { method: "post" }, (f) => {
     f.input("name");
   });
   const expected =
@@ -16,7 +16,7 @@ test("1 input", () => {
 });
 
 test("доп инфа в инпуте", () => {
-  const form = formFor(template, {}, (f) => {
+  const form = HexletCode.formFor(template, {}, (f) => {
     f.input("name", { class: "user-input" });
     f.input("job");
   });
@@ -31,7 +31,7 @@ test("доп инфа в инпуте", () => {
 });
 
 test("только as", () => {
-  const form = formFor(template, {}, (f) => f.input("job", { as: "textarea" }));
+  const form = HexletCode.formFor(template, {}, (f) => f.input("job", { as: "textarea" }));
   const expected =
     '<form action="#" method="post">' +
     '<label for="job">Job</label>' +
@@ -41,7 +41,7 @@ test("только as", () => {
 });
 
 test("as переопределение дефолтов", () => {
-  const form = formFor(template, { url: "#" }, (f) =>
+  const form = HexletCode.formFor(template, { url: "#" }, (f) =>
     f.input("job", { as: "textarea", rows: 50, cols: 50 }),
   );
   const expected =
@@ -53,7 +53,7 @@ test("as переопределение дефолтов", () => {
 });
 
 test("as допы", () => {
-  const form = formFor(template, { url: "#" }, (f) =>
+  const form = HexletCode.formFor(template, { url: "#" }, (f) =>
     f.input("job", { as: "textarea", class: "my-textarea" }),
   );
   const expected =

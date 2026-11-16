@@ -56,4 +56,4 @@ function formFor(
   return new Tag("form", data, builder.getHtml());
 }
 
-export default formFor;
+export default { formFor };

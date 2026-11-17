@@ -1,6 +1,11 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
+  "type": "module",
+  "main": "src/HexletCode.ts",
+  "exports": {
+    ".": "./src/HexletCode.ts"
+  },
   "description": "[![hexlet-check](https://github.com/Owlga/react-urfu-project-81/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Owlga/react-urfu-project-81/actions)",
   "homepage": "https://github.com/Owlga/react-urfu-project-81#readme",
   "bugs": {
@@ -12,8 +17,6 @@
   },
   "license": "ISC",
   "author": "",
-  "type": "commonjs",
-  "main": "index.js",
   "scripts": {
     "build": "rm -rf ./dist && tsc",
     "start": "node dist/src/index.js",

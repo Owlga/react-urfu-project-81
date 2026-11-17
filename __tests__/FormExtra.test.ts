@@ -9,7 +9,7 @@ test("1 input", () => {
     f.input("name");
   });
   const expected = expectedForms.oneInput;
-  expect(form.toString()).toBe(expected);
+  expect(form).toBe(expected);
 });
 
 test("extra attributes in input", () => {
@@ -17,13 +17,13 @@ test("extra attributes in input", () => {
     f.input("name", { class: "user-input" });
   });
   const expected = expectedForms.extraInput;
-  expect(form.toString()).toBe(expected);
+  expect(form).toBe(expected);
 });
 
 test("as textarea", () => {
   const form = HexletCode.formFor(template, {}, (f) => f.input("job", { as: "textarea" }));
   const expected = expectedForms.textarea;
-  expect(form.toString()).toBe(expected);
+  expect(form).toBe(expected);
 });
 
 test("as переопределение дефолтов", () => {
@@ -32,7 +32,7 @@ test("as переопределение дефолтов", () => {
   );
   const expected = expectedForms.textareaNewDefaults;
 
-  expect(form.toString()).toBe(expected);
+  expect(form).toBe(expected);
 });
 
 test("as допы", () => {
@@ -40,5 +40,5 @@ test("as допы", () => {
     f.input("job", { as: "textarea", class: "my-textarea" }),
   );
   const expected = expectedForms.extraAs;
-  expect(form.toString()).toBe(expected);
+  expect(form).toBe(expected);
 });

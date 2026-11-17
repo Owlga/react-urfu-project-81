@@ -5,25 +5,23 @@ import { expectedForms } from "./__fixtures__/expectedForms";
 const template = { name: "rob", job: "hexlet", gender: "m" };
 
 test("empty form", () => {
-  expect(HexletCode.formFor(template, {}, () => {}).toString()).toBe(expectedForms.empty);
+  expect(HexletCode.formFor(template, {}, () => {})).toBe(expectedForms.empty);
 });
 
 test("form with action url", () => {
-  expect(HexletCode.formFor(template, { url: "/users" }, () => {}).toString()).toBe(
-    expectedForms.actionUrl,
-  );
+  expect(HexletCode.formFor(template, { url: "/users" }, () => {})).toBe(expectedForms.actionUrl);
 });
 
 test("form with empty url''", () => {
-  expect(HexletCode.formFor(template, { url: "" }, () => {}).toString()).toBe(expectedForms.empty);
+  expect(HexletCode.formFor(template, { url: "" }, () => {})).toBe(expectedForms.empty);
 });
 
 test("form with empty object url", () => {
-  expect(HexletCode.formFor(template, {}, () => {}).toString()).toBe(expectedForms.empty);
+  expect(HexletCode.formFor(template, {}, () => {})).toBe(expectedForms.empty);
 });
 
 test("form with new method get", () => {
-  expect(HexletCode.formFor(template, { method: "get" }, () => {}).toString()).toBe(
+  expect(HexletCode.formFor(template, { method: "get" }, () => {})).toBe(
     '<form action="#" method="get"></form>',
   );
 });

@@ -11,7 +11,7 @@ test("submit по умолчанию — Save", () => {
     f.submit();
   });
   const expected = expectedForms.submitDefault;
-  expect(form.toString()).toBe(expected);
+  expect(form).toBe(expected);
 });
 
 test("submit с кастомным текстом", () => {
@@ -21,5 +21,5 @@ test("submit с кастомным текстом", () => {
     f.submit("Wow");
   });
   const expected = expectedForms.submitExtra;
-  expect(form.toString()).toBe(expected);
+  expect(form).toBe(expected);
 });

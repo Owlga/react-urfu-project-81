@@ -53,7 +53,7 @@ function formFor(
   const builder = new FormBuilder(template);
   callback(builder);
 
-  return new Tag("form", data, builder.getHtml());
+  return new Tag("form", data, builder.getHtml()).toString();
 }
 
 export default { formFor };

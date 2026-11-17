@@ -1,42 +1,42 @@
 export const expectedForms = {
-  empty: '<form action="#" method="post"></form>',
+  empty: '<form method="post" action="#"></form>',
 
-  actionUrl: '<form action="/users" method="post"></form>',
+  actionUrl: '<form method="post" action="/users"></form>',
 
-  get: '<form action="#" method="get"></form>',
+  get: '<form method="get" action="#"></form>',
 
   oneInput:
-    '<form action="#" method="post">' +
+    '<form method="post" action="#">' +
     '<label for="name">Name</label>' +
     '<input name="name" type="text" value="rob">' +
     "</form>",
 
   extraInput:
-    '<form action="#" method="post">' +
+    '<form method="post" action="#">' +
     '<label for="name">Name</label>' +
     '<input name="name" type="text" value="rob" class="user-input">' +
     "</form>",
 
   textarea:
-    '<form action="#" method="post">' +
+    '<form method="post" action="#">' +
     '<label for="job">Job</label>' +
     '<textarea cols="20" rows="40" name="job">hexlet</textarea>' +
     "</form>",
 
   textareaNewDefaults:
-    '<form action="#" method="post">' +
+    '<form method="post" action="#">' +
     '<label for="job">Job</label>' +
     '<textarea cols="50" rows="50" name="job">hexlet</textarea>' +
     "</form>",
 
   extraAs:
-    '<form action="#" method="post">' +
+    '<form method="post" action="#">' +
     '<label for="job">Job</label>' +
     '<textarea cols="20" rows="40" name="job" class="my-textarea">hexlet</textarea>' +
     "</form>",
 
   submitDefault:
-    '<form action="#" method="post">' +
+    '<form method="post" action="#">' +
     '<label for="name">Name</label>' +
     '<input name="name" type="text" value="rob">' +
     '<label for="job">Job</label>' +
@@ -45,7 +45,7 @@ export const expectedForms = {
     "</form>",
 
   submitExtra:
-    '<form action="#" method="post">' +
+    '<form method="post" action="#">' +
     '<label for="name">Name</label>' +
     '<input name="name" type="text" value="rob">' +
     '<label for="job">Job</label>' +

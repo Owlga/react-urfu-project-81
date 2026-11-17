@@ -49,7 +49,7 @@ function formFor(
   options: Record<string, unknown> = {},
   callback: (f: any) => void,
 ) {
-  const data = { action: options.url || "#", method: options.method || "post" };
+  const data = { method: options.method || "post", action: options.url || "#" };
   const builder = new FormBuilder(template);
   callback(builder);
 

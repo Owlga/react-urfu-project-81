@@ -52,4 +52,9 @@ export const expectedForms = {
     '<input name="job" type="text" value="hexlet">' +
     '<input type="submit" value="Wow">' +
     "</form>",
+
+  labelHtml:
+    '<form method="post" action="#">' +
+    '<label for="name" class="form-label" id="name-label">User</label>' +
+    '<input name="name" type="text" value="rob"><input type="submit" value="Ok"></form>',
 };

@@ -1,34 +1,58 @@
 import Tag from "./Tag.js";
 
+type AttrOptions = {
+  label?: string;
+  labelHtml?: Record<string, string>;
+  as?: string;
+  [key: string]: string | Record<string, string> | undefined;
+};
+
 class FormBuilder {
   public readonly allTags: Tag[] = [];
   constructor(private template: Record<string, string>) {}
 
-  private static createAsTag(attrOptions: Record<string, string>, name: string, content: string) {
-    const { as, ...restAttrs } = attrOptions;
-    const cols = restAttrs.cols || "20";
-    const rows = restAttrs.rows || "40";
-    return new Tag(as, { cols, rows, name, ...restAttrs }, content);
+  private static createAsTag(
+    attrOptions: AttrOptions,
+    name: string,
+    content: string,
+    tagName: string,
+  ) {
+    if (tagName === "textarea") {
+      const cols = attrOptions.cols || "20";
+      const rows = attrOptions.rows || "40";
+      return new Tag(tagName, { cols, rows, name, ...attrOptions }, content);
+    }
+    return new Tag(tagName, { name, ...attrOptions }, content);
   }
+
   private static capitalize(s: string) {
     return s.charAt(0).toUpperCase() + s.slice(1);
   }
 
-  private static createLabelTag(name: string) {
-    return new Tag("label", { for: name }, FormBuilder.capitalize(name));
+  private static createLabelTag(
+    name: string,
+    labelOptions: Record<string, string>,
+    labelName: string | undefined,
+  ) {
+    const content = labelName || FormBuilder.capitalize(name);
+    return new Tag("label", { for: name, ...labelOptions }, content);
   }
 
-  input(name: string, attrOptions: Record<string, string> = {}) {
+  input(name: string, attrOptions: AttrOptions = {}) {
     if (!(name in this.template)) {
       throw new Error(`Field '${name}' does not exist in the template.`);
     }
     const nameValue = this.template[name];
-    this.allTags.push(FormBuilder.createLabelTag(name));
 
-    if (attrOptions.as === "textarea") {
-      this.allTags.push(FormBuilder.createAsTag(attrOptions, name, nameValue));
+    const { labelHtml, label, as, ...restAttrs } = attrOptions;
+
+    const labelOptions = labelHtml || {};
+    this.allTags.push(FormBuilder.createLabelTag(name, labelOptions, label));
+
+    if (as) {
+      this.allTags.push(FormBuilder.createAsTag(restAttrs, name, nameValue, as));
     } else {
-      const obj = { name, type: "text", value: nameValue, ...attrOptions };
+      const obj = { name, type: "text", value: nameValue, ...restAttrs };
       const tag = new Tag("input", obj);
       this.allTags.push(tag);
     }
@@ -47,7 +71,7 @@ class FormBuilder {
 function formFor(
   template: Record<string, string>,
   options: Record<string, unknown> = {},
-  callback: (f: any) => void,
+  callback: (f: FormBuilder) => void,
 ) {
   const data = { method: options.method || "post", action: options.url || "#" };
   const builder = new FormBuilder(template);

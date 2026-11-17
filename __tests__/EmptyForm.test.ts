@@ -21,9 +21,7 @@ test("form with empty object url", () => {
 });
 
 test("form with new method get", () => {
-  expect(HexletCode.formFor(template, { method: "get" }, () => {})).toBe(
-    '<form action="#" method="get"></form>',
-  );
+  expect(HexletCode.formFor(template, { method: "get" }, () => {})).toBe(expectedForms.get);
 });
 
 test("throws an error if field is missing in template", () => {
